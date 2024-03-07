@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: http-memcache
+  labels:
+    app: http-memcache
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: http-memcache
+  template:
+    metadata:
+      labels:
+        app: http-memcache
+    spec:
+      containers:
+        - name: http-memcache
+          image: http-memcache:latest
+          imagePullPolicy: Never
+          env:
+            - name: ADDRESS
+              value: ':9000'
+          ports:
+            - containerPort: 9000
+      restartPolicy: Always
